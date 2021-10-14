@@ -1,12 +1,15 @@
 # home-docker
 
+# pihole
 
-# pihole 
-- set password by running ```sudo pihole -a -p``` in the pihole docker image and follow prompts 
+- set password by running `sudo pihole -a -p` in the pihole docker image and follow prompts
 
+# radarr
 
-# radarr 
 - Need to set the url from localhost to jacket:....
 
+# Deluge
 
-# Deluge 
+# Plex
+
+- go to localhost:3200/web (or whatever port you set)
