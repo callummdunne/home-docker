@@ -11,9 +11,9 @@ services:
         protocol: udp
       - target: 67
         published: 67
+        protocol: udp
       - target: 80
         published: 81
-        protocol: udp
     environment:
       TZ: "Africa/Johannesburg"
     volumes:
@@ -112,6 +112,7 @@ services:
   #   container_name: nginx
   #   volumes:
   #     - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
+  #     - ./docker/nginx/proxy.conf:/etc/nginx/proxy.conf
   #   ports:
   #     - target: 80
   #       published: 80
