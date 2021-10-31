@@ -6,12 +6,9 @@
 - - node.js
 - - docker
 - - Yarn
-- Step 1 (Build frontend )
-- - run `yarn` in frontend folder (This installs the dependencies for the frontend )
-- - run `yarn build` in frontend folder (This builds and packages the frontend so it can be copied into the nginx to be served)
-- Step 2 (Get everything running)
+- Step 1 (Get all containers started)
 - - run `docker compose up -d` in the root folder. (Starts up the docker stack -d detached so that you still have access to your terminal)
-- Step 3 (Set up Radarr, Sonarr, Deluge, Jackett)
+- Step 2 (Set up Radarr, Sonarr, Deluge, Jackett)
 - - go to localhost
 - - click on jackett
 - - add indexer of your choice
@@ -29,11 +26,11 @@
 - - if password changed put in new password
 - - change host to `deluge` (Same reason as to why you put in jackett instead of localhost earlier)
 - - follow the same steps sonarr if done for Radarr and vice versa
-- Step 4 (Setting up pihole)
+- Step 3 (Setting up pihole)
 - - open a terminal into the deluge container
 - - run `sudo pihole -a -p` to change the password (Just follow on screen prompts from here)
 - - go to pihole and login using the password just set
-- Step 5
+- Step 4
 - - setup plex
 
 # pihole
