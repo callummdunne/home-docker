@@ -24,53 +24,53 @@ services:
     restart: unless-stopped
 
   radarr:
+    image: linuxserver/radarr:latest
     container_name: radarr
     restart: unless-stopped
     ports:
       - target: 7878
         published: 7878
-    volumes:
-      - D:/dockertesting/radarr/config:/config
-      - D:/dockertesting/downloads:/downloads
-      - D:/dockertesting/radarr/movies:/movies
     environment:
       - PUID=1000
       - PGID=150
       - TZ=Africa/Johannesburg
-    image: linuxserver/radarr:latest
+    volumes:
+      - D:/dockertesting/radarr/config:/config
+      - D:/dockertesting/downloads:/downloads
+      - D:/dockertesting/radarr/movies:/movies
 
   jackett:
+    image: linuxserver/jackett:latest
     container_name: jackett
     restart: unless-stopped
     ports:
       - target: 9117
         published: 9117
-    volumes:
-      - D:/dockertesting/jackett/config:/config
     environment:
       - PUID=1000
       - PGID=150
       - TZ=Africa/Johannesburg
-    image: linuxserver/jackett
+    volumes:
+      - D:/dockertesting/jackett/config:/config
 
   sonarr:
+    image: linuxserver/sonarr:latest
     container_name: sonarr
     restart: unless-stopped
     ports:
       - target: 8989
         published: 8989
-    volumes:
-      - D:/dockertesting/sonarr/config:/config
-      - D:/dockertesting/downloads:/downloads
-      - D:/dockertesting/sonarr/movies:/movies
     environment:
       - PUID=1000
       - PGID=150
       - TZ=Africa/Johannesburg
-    image: linuxserver/sonarr:latest
+    volumes:
+      - D:/dockertesting/sonarr/config:/config
+      - D:/dockertesting/downloads:/downloads
+      - D:/dockertesting/sonarr/movies:/movies
 
   deluge:
-    image: ghcr.io/linuxserver/deluge
+    image: linuxserver/deluge:latest
     container_name: deluge
     environment:
       - PUID=1000
@@ -90,21 +90,19 @@ services:
     restart: unless-stopped
 
   plex:
-    image: ghcr.io/linuxserver/plex:latest
+    image: plexinc/pms-docker:latest
     container_name: plex
-    network_mode: host
     ports:
       - target: 32400
         published: 32400
     environment:
-      - PUID=1000
-      - PGID=1000
-      - VERSION=docker
       - TZ=Africa/Johannesburg
+      - PLEX_CLAIM=PUT PLEX CLAIM HERE
     volumes:
       - D:/plextest/config:/config
-      - D:/plextest/series:/tv
-      - D:/plextest/movies:/movies
+      - D:/plextest/transcode:/transcode
+      - D:/plextest/series:/data/tv
+      - D:/plextest/movies:/data/movies
     restart: unless-stopped
 
   nginx:

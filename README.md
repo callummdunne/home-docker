@@ -1,48 +1,71 @@
 # home-docker
 
-# Project start up
+## Project setup
 
-- Prerequisites
-- - node.js
-- - docker
-- - Yarn
-- Step 1 (Get all containers started)
-- - run `docker compose up -d` in the root folder. (Starts up the docker stack -d detached so that you still have access to your terminal)
-- Step 2 (Set up Radarr, Sonarr, Deluge, Jackett)
-- - go to localhost
-- - click on jackett
-- - add indexer of your choice
-- - open localhost in new tab
-- - go to radarr/sonarr (steps same for both )
-- - go to adding indexer
-- - click on add
-- - click on custom torznab
-- - follow instructions in jackett for added indexer to radarr or sonar (Instead of localhost in the URL put in `jackett` this is because it is inside of a docker network)
-- - test it, if it works good if not shit
-- - go to adding downloader
-- - open up deluge in new tab and go to settings > plugins and add the label plugin
-- - Back to sonarr/Radarr now
-- - click on add and click on deluge
-- - if password changed put in new password
-- - change host to `deluge` (Same reason as to why you put in jackett instead of localhost earlier)
-- - follow the same steps sonarr if done for Radarr and vice versa
-- Step 3 (Setting up pihole)
-- - open a terminal into the deluge container
-- - run `sudo pihole -a -p` to change the password (Just follow on screen prompts from here)
-- - go to pihole and login using the password just set
-- Step 4
-- - setup plex
+### Prerequisites
 
-# pihole
+- node.js
+- docker
+- Yarn
 
-- set password by running `sudo pihole -a -p` in the pihole docker image and follow prompts
+### Docker setup
 
-# radarr
+- Docker is what managers your containers and each of your services running
+- In this project you will find a file called `docker-compose.yml` In this file is specifies information for each of your services
+- First to setup is to set all the locations where you want the movies/tv shows and configurations stored
+  - To do this you will go into the `docker-compose.yml` file and edit the values under volumes for each of the services
+    Volume example
+    ```
+    volumes:
+    - D:/plextest/config:/config
+    - D:/plextest/transcode:/transcode
+    - D:/plextest/series:/data/tv
+    - D:/plextest/movies:/data/movies
+    ```
+    - You will have the change the D:/... to where ever you want the data to be stored
 
-- Need to set the url from localhost to jacket:....
+### Starting docker
 
-# Deluge
+- Run `docker compose up -d` in the root folder. (Starts up the docker stack -d detached so that you still have access to your terminal)
+- This will take some time the first time you do it as it will have to download all of the images
+- Once it says that all the containers are up and running got to `localhost` and you should see:
 
-# Plex
+### Deluge setup
 
-- go to localhost:3200/web (or whatever port you set)
+- Now that you are on the main screen click on deluge
+- Password for deluge is `deluge`
+- Change the password in settings
+- Go to settings > plugins and add the label plugin
+
+### Jackett setup
+
+- Go to `localhost` click on jackett
+- Go to add indexers and add the indexers of your choice
+- Look at the instructions on jackett for adding it to radarr and sonarr because you are going to follow that soon
+
+### Sonar/Radarr setup
+
+(The setup for these 2 is the same)
+
+- Follow the instructions on jackett to add jackett to it (NB you will have to change the URL a bit from `http://localhost:9117/api/v2.0/indexers/1337x/results/torznab/` to `http://jackett:9117/api/v2.0/indexers/1337x/results/torznab/` as it will be routing inside of docker)
+- To add deluge go to settings > download clients
+- click the add and click on the deluge preset
+- Change the host to `deluge`
+- set the name you want
+- set the password you have set in your deluge
+
+### pihole
+
+- For this you will have to use the command line to set the password for pihole
+- Connect to the pihole container and enter `sudo pihole -a -p` to change the password
+- Once completed you should be able to access pihole with that password without an issue
+
+### Plex
+
+- For this you will have to first go to `https://www.plex.tv/claim/` and create a plex account or login to your plex account
+- This will then show you a claim code
+- This code you must copy and paste into your `docker-compose.yml` file where it says `- PLEX_CLAIM=PUT PLEX CLAIM HERE` so if the claim is `claim-aaaaaa_ddddddd` the value in the docker-compose file will change to `- PLEX_CLAIM=claim-aaaaaa_ddddddd`
+- Then run `docker compose up -d` again to have it take place
+- Then go to `localhost` and click on plex
+- It should show you the first couple of steps to setup your plex server
+- Just note that the claim code only lasts about 4 minutes so could expire if this process takes to long

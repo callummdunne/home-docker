@@ -3,7 +3,7 @@
   export const mappings = [
     {
       id: "pihole",
-      route: `${base}81`,
+      route: `${base}81/admin/`,
       imageLink: "assets/pihole.svg",
       name: "Pihole",
     },
@@ -91,6 +91,7 @@
     grid-template-rows: repeat(2, 1fr);
     column-gap: 10px;
     row-gap: 15px;
+    padding: 1rem;
   }
 
   .image {
