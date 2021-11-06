@@ -29,7 +29,6 @@
 - Run `docker compose up -d` in the root folder. (Starts up the docker stack -d detached so that you still have access to your terminal)
 - This will take some time the first time you do it as it will have to download all of the images
 - Once it says that all the containers are up and running got to `localhost` and you should see:
-- 
 ![docker-home screenshot ](https://user-images.githubusercontent.com/36222895/140610145-097fcbe2-7e9a-479e-aa98-0b6c3317f148.png)
 
 ### Deluge setup
