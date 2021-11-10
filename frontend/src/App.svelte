@@ -1,39 +1,40 @@
 <script lang="ts">
-  const base = "http://localhost:";
+  const base = window.location.href.replace(new RegExp("/$"), ""); // TODO: Change this to use nicer routing in nginx so no ports needed
+
   export const mappings = [
     {
       id: "pihole",
-      route: `${base}81/admin/`,
+      route: `${base}:81/admin/`,
       imageLink: "assets/pihole.svg",
       name: "Pihole",
     },
     {
       id: "plex",
-      route: `${base}32400/web`,
+      route: `${base}:32400/web`,
       imageLink: "assets/plex.svg",
       name: "Plex",
     },
     {
       id: "radarr",
-      route: `${base}7878`,
+      route: `${base}:7878`,
       imageLink: "assets/radarr.svg",
       name: "Radarr",
     },
     {
       id: "jackett",
-      route: `${base}9117`,
+      route: `${base}:9117`,
       imageLink: "assets/jackett.svg",
       name: "Jackett",
     },
     {
       id: "sonarr",
-      route: `${base}8989`,
+      route: `${base}:8989`,
       imageLink: "assets/sonarr.svg",
       name: "Sonarr",
     },
     {
       id: "deluge",
-      route: `${base}8112`,
+      route: `${base}:8112`,
       imageLink: "assets/deluge.svg",
       name: "Deluge",
     },
