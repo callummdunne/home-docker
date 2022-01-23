@@ -38,6 +38,12 @@
       imageLink: "assets/deluge.svg",
       name: "Deluge",
     },
+    {
+      id: "portainer",
+      route: `${base}:9443`,
+      imageLink: "assets/portainer.svg",
+      name: "Portainer",
+    },
   ];
 </script>
 

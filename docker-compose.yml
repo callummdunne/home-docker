@@ -17,8 +17,8 @@ services:
     environment:
       TZ: "Africa/Johannesburg"
     volumes:
-      - "D:/dockertesting/pihole/pihole:/etc/pihole/"
-      - "D:/dockertesting/pihole/dnsmasq:/etc/dnsmasq.d/"
+      - "/internalStorage/pihole/pihole:/etc/pihole/"
+      - "/internalStorage/pihole/dnsmasq:/etc/dnsmasq.d/"
     cap_add:
       - NET_ADMIN
     restart: unless-stopped
@@ -35,9 +35,9 @@ services:
       - PGID=150
       - TZ=Africa/Johannesburg
     volumes:
-      - D:/dockertesting/radarr/config:/config
-      - D:/dockertesting/downloads:/downloads
-      - D:/dockertesting/radarr/movies:/movies
+      - /internalStorage/radarr/config:/config
+      - /internalStorage/downloads:/downloads
+      - /home/callum/media/Movies:/movies
 
   jackett:
     image: linuxserver/jackett:latest
@@ -51,7 +51,7 @@ services:
       - PGID=150
       - TZ=Africa/Johannesburg
     volumes:
-      - D:/dockertesting/jackett/config:/config
+      - /internalStorage/jackett/config:/config
 
   sonarr:
     image: linuxserver/sonarr:latest
@@ -65,9 +65,9 @@ services:
       - PGID=150
       - TZ=Africa/Johannesburg
     volumes:
-      - D:/dockertesting/sonarr/config:/config
-      - D:/dockertesting/downloads:/downloads
-      - D:/dockertesting/sonarr/movies:/movies
+      - /internalStorage/sonarr/config:/config
+      - /internalStorage/downloads:/downloads
+      - /home/callum/media/Series:/series
 
   deluge:
     image: linuxserver/deluge:latest
@@ -77,8 +77,8 @@ services:
       - PGID=1000
       - TZ=Africa/Johannesburg
     volumes:
-      - D:/dockertesting/deluge/config:/config
-      - D:/dockertesting/downloads:/downloads
+      - /internalStorage/deluge/config:/config
+      - /internalStorage/downloads:/downloads
     ports:
       - target: 8112
         published: 8112
@@ -97,12 +97,14 @@ services:
         published: 32400
     environment:
       - TZ=Africa/Johannesburg
-      - PLEX_CLAIM=PUT PLEX CLAIM HERE
+      - PLEX_CLAIM=claim-vt7fbMsz6Eq2WsKpkpiR
+      - PLEX_UID=1000
+      - PLEX_GID=1000
     volumes:
-      - D:/plextest/config:/config
-      - D:/plextest/transcode:/transcode
-      - D:/plextest/series:/data/tv
-      - D:/plextest/movies:/data/movies
+      - /internalStorage/config:/config
+      - /internalStorage/transcode:/transcode
+      - /home/callum/media/Series:/data/series
+      - /home/callum/media/Movies:/data/movies
     restart: unless-stopped
 
   nginx:
